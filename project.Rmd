@@ -86,7 +86,7 @@ print(predBM)
 
 However this model takes a long time to execute. Hence a model where the number of trees per forest is set to 10 instead of the default 500 is used. The accuracy of this model is not that different from the previous one. Owing to space constraint the model is not shown and only the accuracy is shown.
 
-```{r mod2, echo=FALSE, cache=TRUE, message=FALSE, warning=FALSE}
+```{r mod2, echo=FALSE, cache=TRUE, warning=FALSE}
 control <- trainControl(method="repeatedcv", number=10, repeats=3)
 tunegrid <- expand.grid(.mtry= sqrt(ncol(trainingPV)))
 modFitTree10 <- train(classe ~., data = trainingPV, method = "rf", ntree = 10,
@@ -100,7 +100,7 @@ print(sum(prednewTree10 == testingPV$classe)/length(prednewTree10))
 
 In third model attempt, ntree = 10 and the number of variables is taken to be only 5. The accuracy still remains high. Hence this model is used for predictions.
 
-```{r mod3, echo=FALSE, cache=TRUE, message=FALSE, warning=FALSE}
+```{r mod3, echo=FALSE, cache=TRUE, warning=FALSE}
 newDF5 <- trainingPV[, c(impNames[1:5], "classe")]
 control <- trainControl(method="repeatedcv", number=10, repeats=3)
 tunegrid <- expand.grid(.mtry= 3)
